@@ -9,9 +9,11 @@ import SignUpModal from "./SignUpModal";
 export default function Login() {
 	const currentUser = useSelector((state) => state.authReducers);
 	const dispatch = useDispatch();
+
 	const onLogout = () => {
 		dispatch(logout());
 	};
+
 	const renderAuthButton = () => {
 		if (currentUser.isLoggedin) {
 			return (

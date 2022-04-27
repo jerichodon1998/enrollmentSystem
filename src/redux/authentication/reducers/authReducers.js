@@ -13,13 +13,18 @@ import {
 	UPDATE_USER_PROFILE_SUCCESS,
 	UPDATE_USER_PROFILE_FAILED,
 	CLEAR_AUTH_ERROR,
+	CHECK_USER_ADMIN,
 } from "../../constants";
 const initialState = {
 	error: null,
 	username: "",
 	uid: "",
 	email: "",
+	isAdmin: false,
+
 	info: null,
+
+	checkUserAdmin: false,
 
 	isLoggedin: false,
 	loginRequest: false,
@@ -38,6 +43,11 @@ const initialState = {
 
 const authReducers = (state = initialState, action) => {
 	switch (action.type) {
+		case CHECK_USER_ADMIN:
+			return {
+				...state,
+				isAdmin: action.payload,
+			};
 		case GET_CURRENT_USER:
 			if (action.payload.user !== null)
 				return {

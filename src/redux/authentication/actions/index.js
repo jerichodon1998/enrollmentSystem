@@ -13,6 +13,7 @@ import {
 	UPDATE_USER_PROFILE_REQUEST,
 	UPDATE_USER_PROFILE_FAILED,
 	UPDATE_USER_PROFILE_SUCCESS,
+	CHECK_USER_ADMIN,
 } from "../../constants";
 
 import {
@@ -25,13 +26,32 @@ import {
 	signInWithEmailAndPassword,
 	updateProfile,
 } from "firebase/auth";
-import { app } from "../../../firebaseConfig";
+import { app, db } from "../../../firebaseConfig";
+import { collection, onSnapshot, query } from "firebase/firestore";
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 export const clearAuthError = () => {
 	return { type: CLEAR_AUTH_ERROR };
+};
+
+export const checkIsUserAdmin = (uid) => {
+	return (dispatch) => {
+		const myQuery = query(collection(db, "adminUsersUid"));
+		onSnapshot(myQuery, (querySnapshot) => {
+			const data = querySnapshot;
+			const adminUsersArray = data.docs.map((doc) => {
+				return doc.data();
+			});
+			// this is not the best way because it doesn't break after it finds the value
+			adminUsersArray.forEach((value) => {
+				if (uid === value.adminUid) {
+					dispatch({ type: CHECK_USER_ADMIN, payload: true });
+				}
+			});
+		});
+	};
 };
 
 export const loginWithGoogle = () => {

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { checkIsUserAdmin } from "../redux/authentication/actions";
 import Login from "./auth/Login";
 
 const linkStyle = {
@@ -9,6 +11,13 @@ const linkStyle = {
 };
 
 export default function Header() {
+	const currentUser = useSelector((state) => state.authReducers);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(checkIsUserAdmin(currentUser.uid));
+	}, [dispatch, currentUser.uid]);
+
 	return (
 		<Navbar bg="light" expand="lg">
 			<Container fluid>
@@ -19,11 +28,13 @@ export default function Header() {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
-					<Nav.Item className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
-						<Link to="/dummy" style={linkStyle}>
-							dummy
-						</Link>
-					</Nav.Item>
+					{currentUser.isAdmin ? (
+						<Nav.Item className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
+							<Link to="/admin" style={linkStyle}>
+								Admin
+							</Link>
+						</Nav.Item>
+					) : null}
 
 					<Container style={{ textAlign: "right" }}>
 						<Login />

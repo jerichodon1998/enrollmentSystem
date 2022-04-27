@@ -3,6 +3,7 @@ import {
 	STUDENT_ENROLLMENT_FAILED,
 	STUDENT_ENROLLMENT_REQUEST,
 	STUDENT_ENROLLMENT_SUCCESS,
+	CLEAR_ENROLLMENT_DATA,
 } from "../../constants";
 
 const initialState = {
@@ -23,6 +24,12 @@ const enrollmentReducers = (state = initialState, action) => {
 				...state,
 				isEnrolled: true,
 				programEnrolled: action.payload,
+			};
+		case CLEAR_ENROLLMENT_DATA:
+			return {
+				...state,
+				isEnrolled: false,
+				programEnrolled: null,
 			};
 		case STUDENT_ENROLLMENT_REQUEST:
 			return {

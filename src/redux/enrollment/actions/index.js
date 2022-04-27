@@ -36,7 +36,6 @@ export const isStudentEnrolled = (uid) => {
 							programAcronym: tempDoc.programAcronym,
 							programName: tempDoc.programName,
 						};
-						console.log("this was executed");
 						dispatch({ type: STUDENT_ENROLLED_CHECK, payload: programSelectedInfo });
 					}
 				});

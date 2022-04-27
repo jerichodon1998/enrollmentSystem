@@ -14,7 +14,6 @@ export default function ProgramScreen() {
 
 	const onEnrollSubmit = (values) => {
 		dispatch(enrollStudent(program, currentUser.uid, values));
-		console.log(values);
 	};
 
 	useEffect(() => {

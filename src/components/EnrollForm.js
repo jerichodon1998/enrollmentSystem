@@ -18,10 +18,6 @@ export default function EnrollForm({ onEnrollSubmit }) {
 
 	const error = (meta) => (meta.error && meta.touched ? { border: "solid 3px red" } : null);
 
-	// const onFormSubmit = (values, form) => {
-	// 	console.log(values, form);
-	// };
-
 	const renderForm = () => {
 		return (
 			<Form
