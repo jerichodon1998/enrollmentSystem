@@ -9,19 +9,22 @@ export default function AdminCollegeCard({ title, programs }) {
 					<Card.Title>{title}</Card.Title>
 					<Row>
 						{programs.map((prog) => {
-							return (
-								<Col key={prog.programAcronym}>
-									<Card>
-										<Card.Body>
-											<h6>
-												{prog.programName} ({prog.programAcronym})
-											</h6>
-											<hr />
-											<h6>Enrollees: {prog.enrollees}</h6>
-										</Card.Body>
-									</Card>
-								</Col>
-							);
+							if (prog !== undefined) {
+								return (
+									<Col key={prog.programAcronym}>
+										<Card>
+											<Card.Body>
+												<h6>
+													{prog.programName} ({prog.programAcronym})
+												</h6>
+												<hr />
+												<h6>Enrollees: {prog.enrollees}</h6>
+											</Card.Body>
+										</Card>
+									</Col>
+								);
+							}
+							return null;
 						})}
 					</Row>
 				</Card.Body>

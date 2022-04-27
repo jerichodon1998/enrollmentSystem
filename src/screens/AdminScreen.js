@@ -21,7 +21,6 @@ export default function AdminScreen() {
 	const dispatch = useDispatch();
 
 	const renderCollegeCard = () => {
-		console.log(programs);
 		return (
 			<>
 				<Row style={rowStyle}>
