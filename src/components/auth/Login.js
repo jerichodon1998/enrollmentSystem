@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, logout } from "../../redux/authentication/actions";
-import { isStudentEnrolled } from "../../redux/enrollment/actions";
+import { clearEnrollmentData, isStudentEnrolled } from "../../redux/enrollment/actions";
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 
@@ -12,6 +12,7 @@ export default function Login() {
 
 	const onLogout = () => {
 		dispatch(logout());
+		dispatch(clearEnrollmentData());
 	};
 
 	const renderAuthButton = () => {

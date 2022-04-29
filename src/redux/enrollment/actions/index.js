@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 
 import {
+	CLEAR_ENROLLMENT_DATA,
 	STUDENT_ENROLLED_CHECK,
 	STUDENT_ENROLLMENT_FAILED,
 	STUDENT_ENROLLMENT_REQUEST,
@@ -99,4 +100,8 @@ export const enrollStudent = (program, uid, formValues) => {
 			});
 		}
 	};
+};
+
+export const clearEnrollmentData = () => {
+	return { type: CLEAR_ENROLLMENT_DATA };
 };
