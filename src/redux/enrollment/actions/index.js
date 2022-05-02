@@ -27,11 +27,14 @@ export const isStudentEnrolled = (uid) => {
 			const data = querySnapshot.docs;
 			// forEach loop is not ideal for this scenario
 			// this needs to break after the specific data is found
-			data.forEach((doc) => {
+			for (let i = 0; i < data.length; i++) {
+				let enrolleeUidMatch = false;
+				const doc = data[i];
 				const tempDoc = doc.data();
 				const enrolleesInfo = tempDoc.enrolleesInfo || [];
 				enrolleesInfo.forEach((enrollee) => {
 					if (enrollee.uid === uid) {
+						enrolleeUidMatch = true;
 						const programSelectedInfo = {
 							programUid: doc.id,
 							programAcronym: tempDoc.programAcronym,
@@ -40,7 +43,22 @@ export const isStudentEnrolled = (uid) => {
 						dispatch({ type: STUDENT_ENROLLED_CHECK, payload: programSelectedInfo });
 					}
 				});
-			});
+				if (enrolleeUidMatch) break;
+			}
+			// data.forEach((doc) => {
+			// 	const tempDoc = doc.data();
+			// 	const enrolleesInfo = tempDoc.enrolleesInfo || [];
+			// 	enrolleesInfo.forEach((enrollee) => {
+			// 		if (enrollee.uid === uid) {
+			// 			const programSelectedInfo = {
+			// 				programUid: doc.id,
+			// 				programAcronym: tempDoc.programAcronym,
+			// 				programName: tempDoc.programName,
+			// 			};
+			// 			dispatch({ type: STUDENT_ENROLLED_CHECK, payload: programSelectedInfo });
+			// 		}
+			// 	});
+			// });
 		});
 	};
 };

@@ -45,11 +45,18 @@ export const checkIsUserAdmin = (uid) => {
 				return doc.data();
 			});
 			// this is not the best way because it doesn't break after it finds the value
-			adminUsersArray.forEach((value) => {
+			for (let i = 0; i < adminUsersArray.length; i++) {
+				const value = adminUsersArray[i];
 				if (uid === value.adminUid) {
 					dispatch({ type: CHECK_USER_ADMIN, payload: true });
+					break;
 				}
-			});
+			}
+			// adminUsersArray.forEach((value) => {
+			// 	if (uid === value.adminUid) {
+			// 		dispatch({ type: CHECK_USER_ADMIN, payload: true });
+			// 	}
+			// });
 		});
 	};
 };
