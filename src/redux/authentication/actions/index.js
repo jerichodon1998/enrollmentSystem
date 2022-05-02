@@ -73,7 +73,7 @@ export const loginWithGoogle = () => {
 				dispatch({ type: USER_LOGIN_SUCCESS, payload: user });
 			})
 			.catch((error) => {
-				dispatch({ USER_LOGIN_FAILED, payload: { error: error } });
+				dispatch({ type: USER_LOGIN_FAILED, payload: { error: error } });
 			});
 	};
 };
