@@ -39,6 +39,7 @@ export const isStudentEnrolled = (uid) => {
 							programUid: doc.id,
 							programAcronym: tempDoc.programAcronym,
 							programName: tempDoc.programName,
+							status: enrollee.status,
 						};
 						dispatch({ type: STUDENT_ENROLLED_CHECK, payload: programSelectedInfo });
 					}
@@ -91,6 +92,7 @@ export const enrollStudent = (program, uid, formValues) => {
 			const newEnrollee = {
 				uid: uid,
 				...formValues,
+				status: "pending",
 				timeStamp: Timestamp.now(),
 			};
 			const updatedEnrollees = programInfo.enrolleesInfo || [];

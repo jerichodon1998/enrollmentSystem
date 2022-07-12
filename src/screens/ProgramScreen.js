@@ -36,10 +36,17 @@ export default function ProgramScreen() {
 					<Card>
 						<Card.Body>
 							{enrollment.isEnrolled ? (
-								<h1>
-									You are Already Enrolled on{" "}
-									{enrollment.programEnrolled.programName}
-								</h1>
+								enrollment.status === "accepted" ? (
+									<h1>
+										You are Already Enrolled on{" "}
+										{enrollment.programEnrolled.programName}
+									</h1>
+								) : (
+									<h1>
+										Enrollment Pending on{" "}
+										{enrollment.programEnrolled.programName}
+									</h1>
+								)
 							) : (
 								<EnrollForm onEnrollSubmit={onEnrollSubmit} />
 							)}

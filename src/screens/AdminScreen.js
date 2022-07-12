@@ -25,38 +25,7 @@ export default function AdminScreen() {
 			<>
 				<Row style={rowStyle}>
 					<Col>
-						<AdminCollegeCard
-							title="College of Computer Studies"
-							programs={[programs[13], programs[12], programs[10]]}
-						/>
-					</Col>
-					<Col>
-						<AdminCollegeCard
-							title="College of Engineering"
-							programs={[programs[4], programs[8], programs[9]]}
-						/>
-					</Col>
-				</Row>
-				<Row style={rowStyle}>
-					<Col>
-						<AdminCollegeCard
-							title="College of Education"
-							programs={[programs[0], programs[6], programs[7]]}
-						/>
-					</Col>
-					<Col>
-						<AdminCollegeCard title="College of Criminology" programs={[programs[3]]} />
-					</Col>
-				</Row>
-				<Row style={rowStyle}>
-					<Col>
-						<AdminCollegeCard title="College of Nursing" programs={[programs[1]]} />
-					</Col>
-					<Col>
-						<AdminCollegeCard
-							title="College of Medicine"
-							programs={[programs[2], programs[5], programs[11]]}
-						/>
+						<AdminCollegeCard title="College of Computer Studies" programs={programs} />
 					</Col>
 				</Row>
 			</>
@@ -74,7 +43,6 @@ export default function AdminScreen() {
 				<Container>
 					<Row>
 						<Col style={fontStyle}>Total Enrollees: {totalEnrollees}</Col>
-						<Col style={fontStyle}>Total Colleges: 6</Col>
 						<Col style={fontStyle}>Total Programs: {programs.length}</Col>
 					</Row>
 				</Container>
@@ -92,9 +60,13 @@ export default function AdminScreen() {
 			onSnapshot(myQuery, (querySnapshot) => {
 				const data = querySnapshot.docs;
 				let tempTotal = 0;
-				setPrograms(data.map((doc) => doc.data()));
+				setPrograms(
+					data.map((doc) => {
+						return { id: doc.id, ...doc.data() };
+					})
+				);
 				data.forEach((doc) => {
-					tempTotal += doc.data().enrollees;
+					tempTotal += doc.data().enrolleesInfo.length;
 				});
 				setTotalEnrollees(tempTotal);
 			});

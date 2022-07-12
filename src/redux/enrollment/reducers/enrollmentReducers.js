@@ -8,6 +8,7 @@ import {
 
 const initialState = {
 	isEnrolled: false,
+	status: null,
 	programEnrolled: null,
 
 	enrollmentSuccess: false,
@@ -23,12 +24,14 @@ const enrollmentReducers = (state = initialState, action) => {
 			return {
 				...state,
 				isEnrolled: true,
+				status: action.payload.status,
 				programEnrolled: action.payload,
 			};
 		case CLEAR_ENROLLMENT_DATA:
 			return {
 				...state,
 				isEnrolled: false,
+				status: null,
 				programEnrolled: null,
 			};
 		case STUDENT_ENROLLMENT_REQUEST:

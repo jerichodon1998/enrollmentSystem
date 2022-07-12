@@ -28,12 +28,41 @@ export default function Header() {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
-					{currentUser.isAdmin ? (
+					{currentUser ? (
 						<Nav.Item className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }}>
-							<Link to="/admin" style={linkStyle}>
-								Admin
+							<Link
+								to={"/myprofile/" + currentUser.uid}
+								style={{ ...linkStyle, textDecorationLine: "underline" }}
+							>
+								{currentUser.username.split(" ")[0]}
 							</Link>
 						</Nav.Item>
+					) : null}
+					{currentUser.isAdmin ? (
+						<>
+							<Nav.Item
+								className="me-auto my-2 my-lg-0"
+								style={{ maxHeight: "100px", marginLeft: ".5rem" }}
+							>
+								<Link
+									to="/admin"
+									style={{ ...linkStyle, textDecorationLine: "underline" }}
+								>
+									Admin
+								</Link>
+							</Nav.Item>
+							<Nav.Item
+								className="me-auto my-2 my-lg-0"
+								style={{ maxHeight: "100px", marginLeft: ".5rem" }}
+							>
+								<Link
+									to="/admincourses"
+									style={{ ...linkStyle, textDecorationLine: "underline" }}
+								>
+									Courses
+								</Link>
+							</Nav.Item>
+						</>
 					) : null}
 
 					<Container style={{ textAlign: "right" }}>
